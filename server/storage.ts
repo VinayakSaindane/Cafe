@@ -188,6 +188,15 @@ export class MemStorage implements IStorage {
       },
       {
         id: this.menuItemIdCounter++,
+        name: "Mocha Cloud",
+        description: "Rich espresso with dark chocolate, steamed milk, whipped cream, and cocoa dust.",
+        price: 5.25,
+        imageUrl: "https://images.unsplash.com/photo-1579888071069-c107a6f79d82?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: true,
+        categoryId: "coffee"
+      },
+      {
+        id: this.menuItemIdCounter++,
         name: "Cappuccino",
         description: "Equal parts espresso, steamed milk, and milk foam for a perfectly balanced coffee experience.",
         price: 4.50,
@@ -206,10 +215,73 @@ export class MemStorage implements IStorage {
       },
       {
         id: this.menuItemIdCounter++,
+        name: "Iced Matcha",
+        description: "Ceremonial matcha shaken with milk, vanilla, and ice for a smooth green tea finish.",
+        price: 5.15,
+        imageUrl: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: true,
+        categoryId: "tea"
+      },
+      {
+        id: this.menuItemIdCounter++,
+        name: "Breakfast Croissant",
+        description: "Buttery croissant layered with egg, cheddar, tomato jam, and peppery greens.",
+        price: 7.95,
+        imageUrl: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: false,
+        categoryId: "breakfast"
+      },
+      {
+        id: this.menuItemIdCounter++,
+        name: "Berry Yogurt Bowl",
+        description: "Greek yogurt with seasonal berries, honey almond granola, chia, and mint.",
+        price: 7.50,
+        imageUrl: "https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: false,
+        categoryId: "breakfast"
+      },
+      {
+        id: this.menuItemIdCounter++,
+        name: "Pesto Chicken Panini",
+        description: "Grilled sourdough with chicken, basil pesto, mozzarella, roasted peppers, and arugula.",
+        price: 10.75,
+        imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: false,
+        categoryId: "lunch"
+      },
+      {
+        id: this.menuItemIdCounter++,
+        name: "Garden Grain Bowl",
+        description: "Quinoa, roasted vegetables, chickpeas, greens, feta, and lemon herb dressing.",
+        price: 11.25,
+        imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: false,
+        categoryId: "lunch"
+      },
+      {
+        id: this.menuItemIdCounter++,
         name: "Tiramisu",
         description: "Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.",
         price: 6.95,
         imageUrl: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: false,
+        categoryId: "desserts"
+      },
+      {
+        id: this.menuItemIdCounter++,
+        name: "Chocolate Hazelnut Tart",
+        description: "Crisp cocoa shell filled with silky hazelnut ganache and toasted nuts.",
+        price: 6.75,
+        imageUrl: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
+        isFeatured: true,
+        categoryId: "desserts"
+      },
+      {
+        id: this.menuItemIdCounter++,
+        name: "Lemon Blueberry Cake",
+        description: "Tender lemon sponge with blueberry compote and a light cream cheese frosting.",
+        price: 6.25,
+        imageUrl: "https://images.unsplash.com/photo-1464195244916-405fa0a82545?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80",
         isFeatured: false,
         categoryId: "desserts"
       }
@@ -252,6 +324,22 @@ export class MemStorage implements IStorage {
         rating: 4,
         content: "Great atmosphere for working remotely. The wifi is reliable, and they don't mind if you stay for a few hours. Their specialty teas are exceptional, and the pastries are always fresh.",
         createdAt: new Date()
+      },
+      {
+        id: this.reviewIdCounter++,
+        author: "Priya Shah",
+        title: "Weekend Visitor",
+        rating: 5,
+        content: "The staff made great recommendations and the chocolate hazelnut tart was outstanding. It felt relaxed, clean, and easy to enjoy with friends.",
+        createdAt: new Date()
+      },
+      {
+        id: this.reviewIdCounter++,
+        author: "Noah Williams",
+        title: "Pickup Customer",
+        rating: 5,
+        content: "Ordering ahead worked smoothly. My latte and panini were ready on time, packed neatly, and still tasted fresh when I got back to the office.",
+        createdAt: new Date()
       }
     ];
 
@@ -287,6 +375,24 @@ export class MemStorage implements IStorage {
         content: "The way we work has changed dramatically in recent years, with more people than ever embracing remote work. As a result, coffee shops have evolved from simple beverage stops to bustling hubs of productivity and creativity.\n\nAt Brew & Bite, we've embraced this shift by creating an environment that caters to both social gatherings and focused work sessions. Our comfortable seating, reliable high-speed WiFi, and ample power outlets make it easy to settle in for a productive day away from the traditional office.\n\nBut what makes a coffee shop an ideal workspace? Beyond the practical amenities, there's something special about the ambient buzz of a café – the gentle hum of conversations, the rhythmic sounds of the espresso machine, and the comforting aroma of freshly brewed coffee. Many remote workers find that this environment strikes the perfect balance between isolation and overstimulation, creating an atmosphere conducive to focus and creativity.\n\nWe've also introduced features specifically designed for our working guests:\n\n- Extended table times during weekday business hours\n- A dedicated quiet zone in our upstairs area\n- Meeting room rentals for collaborative sessions\n- Special weekday worker promotions, like our \"Productivity Package\" that includes unlimited coffee refills\n\nWhether you're a freelancer looking for a change of scenery, a remote employee seeking escape from the home office, or an entrepreneur in need of an inspiring space to develop your next big idea, we've got you covered.\n\nNext time you need a productive workspace, grab your laptop and join our community of remote workers. We're more than happy to be your office away from office.",
         imageUrl: "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
         publishedAt: new Date(2023, 4, 10) // May 10, 2023
+      },
+      {
+        id: this.blogPostIdCounter++,
+        title: "How We Build a Better Breakfast Menu",
+        author: "Brew & Bite Kitchen",
+        excerpt: "A look at the small choices behind our breakfast favorites, from bread texture to balanced toppings.",
+        content: "A cafe breakfast should be satisfying without slowing down the rest of your day. When we develop breakfast dishes, we focus on contrast: crisp toast with soft egg, creamy yogurt with toasted granola, bright herbs against richer cheese, and coffee pairings that make each plate feel complete.\n\nOur team tests each item for dine-in and pickup so the food holds up well whether you stay with us or take it on the go. That means using sturdy sourdough for avocado toast, keeping sauces bright but not watery, and choosing toppings that travel cleanly.\n\nThe goal is simple: food that feels thoughtfully made, easy to order, and worth coming back for on a regular morning.",
+        imageUrl: "https://images.unsplash.com/photo-1525351484163-7529414344d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+        publishedAt: new Date(2024, 1, 8)
+      },
+      {
+        id: this.blogPostIdCounter++,
+        title: "What Makes a Great Pickup Order",
+        author: "Brew & Bite Team",
+        excerpt: "Fresh food, clear timing, and reliable packaging are the quiet details that make online ordering work.",
+        content: "Pickup ordering works best when every step is predictable. Guests should know what is available, how long preparation will take, and what to expect when they arrive. Behind the counter, we batch drinks carefully, label orders clearly, and keep hot and cold items separated.\n\nWe also choose menu items that stay delicious after a short walk or drive. Paninis are pressed to keep their structure, bowls are packed with dressing on the side when needed, and pastries are boxed so they arrive looking as good as they taste.\n\nIt is not complicated, but it takes attention. That is the standard we aim for every time an online order comes through.",
+        imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80",
+        publishedAt: new Date(2024, 0, 18)
       }
     ];
 
@@ -436,7 +542,7 @@ export class MemStorage implements IStorage {
 
   async createMenuItem(item: InsertMenuItem): Promise<MenuItem> {
     const id = this.menuItemIdCounter++;
-    const newItem: MenuItem = { ...item, id };
+    const newItem: MenuItem = { ...item, id, isFeatured: item.isFeatured ?? false };
     this.menuItems.set(id, newItem);
     return newItem;
   }
@@ -448,7 +554,7 @@ export class MemStorage implements IStorage {
 
   async createReview(review: InsertReview): Promise<Review> {
     const id = this.reviewIdCounter++;
-    const newReview: Review = { ...review, id, createdAt: new Date() };
+    const newReview: Review = { ...review, id, createdAt: review.createdAt ?? new Date() };
     this.reviews.set(id, newReview);
     return newReview;
   }
@@ -471,7 +577,7 @@ export class MemStorage implements IStorage {
 
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
     const id = this.blogPostIdCounter++;
-    const newPost: BlogPost = { ...post, id };
+    const newPost: BlogPost = { ...post, id, publishedAt: post.publishedAt ?? new Date() };
     this.blogPosts.set(id, newPost);
     return newPost;
   }
@@ -491,7 +597,7 @@ export class MemStorage implements IStorage {
   // Booking methods
   async createBooking(booking: InsertBooking): Promise<Booking> {
     const id = this.bookingIdCounter++;
-    const newBooking: Booking = { ...booking, id, createdAt: new Date() };
+    const newBooking: Booking = { ...booking, id, notes: booking.notes ?? null, createdAt: booking.createdAt ?? new Date() };
     this.bookings.set(id, newBooking);
     return newBooking;
   }
@@ -508,7 +614,7 @@ export class MemStorage implements IStorage {
 
   async addItemToCart(item: InsertCartItem): Promise<CartItem> {
     const id = this.cartItemIdCounter++;
-    const newItem: CartItem = { ...item, id, createdAt: new Date() };
+    const newItem: CartItem = { ...item, id, quantity: item.quantity ?? 1, createdAt: item.createdAt ?? new Date() };
     this.cartItems.set(id, newItem);
     return newItem;
   }
@@ -527,14 +633,14 @@ export class MemStorage implements IStorage {
   // Pickup order methods
   async createPickupOrder(order: InsertPickupOrder): Promise<PickupOrder> {
     const id = this.pickupOrderIdCounter++;
-    const newOrder: PickupOrder = { ...order, id, createdAt: new Date() };
+    const newOrder: PickupOrder = { ...order, id, status: order.status ?? "pending", createdAt: order.createdAt ?? new Date() };
     this.pickupOrders.set(id, newOrder);
     return newOrder;
   }
 
   async addPickupOrderItem(item: InsertPickupOrderItem): Promise<PickupOrderItem> {
     const id = this.pickupOrderItemIdCounter++;
-    const newItem: PickupOrderItem = { ...item, id };
+    const newItem: PickupOrderItem = { ...item, id, quantity: item.quantity ?? 1 };
     this.pickupOrderItems.set(id, newItem);
     return newItem;
   }
@@ -542,14 +648,21 @@ export class MemStorage implements IStorage {
   // Regular order methods
   async createOrder(order: InsertOrder): Promise<Order> {
     const id = this.orderIdCounter++;
-    const newOrder: Order = { ...order, id, createdAt: new Date() };
+    const newOrder: Order = {
+      ...order,
+      id,
+      status: order.status ?? "pending",
+      deliveryAddress: order.deliveryAddress ?? null,
+      isDelivery: order.isDelivery ?? false,
+      createdAt: order.createdAt ?? new Date(),
+    };
     this.orders.set(id, newOrder);
     return newOrder;
   }
 
   async addOrderItem(item: InsertOrderItem): Promise<OrderItem> {
     const id = this.orderItemIdCounter++;
-    const newItem: OrderItem = { ...item, id };
+    const newItem: OrderItem = { ...item, id, quantity: item.quantity ?? 1 };
     this.orderItems.set(id, newItem);
     return newItem;
   }

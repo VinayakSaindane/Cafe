@@ -61,6 +61,9 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+const fallbackMenuImage =
+  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80";
+
 const OrderOnline = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [cart, setCart] = useState<CartItemWithDetails[]>([]);
@@ -87,24 +90,17 @@ const OrderOnline = () => {
 
   // Get menu items
   const { data: menuItems = [], isLoading: isLoadingItems } = useQuery<MenuItem[]>({
-    queryKey: ["/api/menu/items", selectedCategory],
-    queryFn: async () => {
-      const endpoint = selectedCategory 
-        ? `/api/menu/items?category=${selectedCategory}` 
-        : "/api/menu/items";
-      const res = await fetch(endpoint, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch menu items");
-      return res.json();
-    },
+    queryKey: [selectedCategory ? `/api/menu/items?category=${selectedCategory}` : "/api/menu/items"],
   });
 
   // Get cart items
   const { data: cartItems = [], isLoading: isLoadingCart } = useQuery<CartItemWithDetails[]>({
     queryKey: ["/api/cart"],
-    onSuccess: (data) => {
-      setCart(data);
-    }
   });
+
+  useEffect(() => {
+    setCart(cartItems.filter((item) => item.menuItem));
+  }, [cartItems]);
 
   // Mutations for cart operations
   const addToCartMutation = useMutation({
@@ -507,6 +503,9 @@ const OrderOnline = () => {
                                       src={item.imageUrl}
                                       alt={item.name}
                                       className="w-full h-full object-cover"
+                                      onError={(event) => {
+                                        event.currentTarget.src = fallbackMenuImage;
+                                      }}
                                     />
                                   </div>
                                   <div className="flex-grow">
@@ -556,11 +555,14 @@ const OrderOnline = () => {
                                   <Card key={item.id} className="overflow-hidden">
                                     <CardContent className="p-4 flex items-center">
                                       <div className="w-20 h-20 rounded overflow-hidden mr-4 flex-shrink-0">
-                                        <img
-                                          src={item.imageUrl}
-                                          alt={item.name}
-                                          className="w-full h-full object-cover"
-                                        />
+                                          <img
+                                            src={item.imageUrl}
+                                            alt={item.name}
+                                            className="w-full h-full object-cover"
+                                            onError={(event) => {
+                                              event.currentTarget.src = fallbackMenuImage;
+                                            }}
+                                          />
                                       </div>
                                       <div className="flex-grow">
                                         <h3 
@@ -612,11 +614,14 @@ const OrderOnline = () => {
                       .map((item) => (
                         <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
                           <div className="h-60 overflow-hidden">
-                            <img
-                              src={item.imageUrl}
-                              alt={item.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                              <img
+                                src={item.imageUrl}
+                                alt={item.name}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                onError={(event) => {
+                                  event.currentTarget.src = fallbackMenuImage;
+                                }}
+                              />
                           </div>
                           <CardContent className="p-6">
                             <div className="flex justify-between items-center mb-3">
@@ -693,6 +698,9 @@ const OrderOnline = () => {
                               src={item.menuItem.imageUrl}
                               alt={item.menuItem.name}
                               className="w-full h-full object-cover"
+                              onError={(event) => {
+                                event.currentTarget.src = fallbackMenuImage;
+                              }}
                             />
                           </div>
                           <div>

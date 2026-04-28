@@ -9,6 +9,7 @@ import PickGo from "@/pages/PickGo";
 import Bookings from "@/pages/Bookings";
 import Reviews from "@/pages/Reviews";
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 import Contact from "@/pages/Contact";
 import OrderOnline from "@/pages/OrderOnline";
 import NotFound from "@/pages/not-found";
@@ -27,6 +28,7 @@ function Router() {
           <Route path="/pick-go" component={PickGo} />
           <Route path="/bookings" component={Bookings} />
           <Route path="/reviews" component={Reviews} />
+          <Route path="/blog/:id" component={BlogPost} />
           <Route path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />
           <Route path="/order-online" component={OrderOnline} />

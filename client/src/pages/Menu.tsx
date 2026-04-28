@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Tab } from "@headlessui/react";
+import { Link } from "wouter";
 import { MenuItem, MenuCategory } from "@shared/schema";
 import MenuItemCard from "@/components/MenuItemCard";
 import { Button } from "@/components/ui/button";
@@ -18,16 +19,7 @@ const Menu = () => {
   });
 
   const { data: menuItems = [], isLoading: isLoadingItems } = useQuery<MenuItem[]>({
-    queryKey: ["/api/menu/items", selectedCategory],
-    queryFn: async () => {
-      const endpoint = selectedCategory 
-        ? `/api/menu/items?category=${selectedCategory}` 
-        : "/api/menu/items";
-      const res = await fetch(endpoint, { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to fetch menu items");
-      return res.json();
-    },
-    enabled: true,
+    queryKey: [selectedCategory ? `/api/menu/items?category=${selectedCategory}` : "/api/menu/items"],
   });
 
   const handleAddToCart = async (item: MenuItem) => {
@@ -53,7 +45,7 @@ const Menu = () => {
         {isLoadingCategories ? (
           <div className="max-w-3xl mx-auto mb-8 h-12 bg-gray-100 rounded animate-pulse"></div>
         ) : (
-          <Tab.Group onChange={(index) => setSelectedCategory(categories[index]?.id || null)}>
+          <Tab.Group onChange={(index) => setSelectedCategory(index === 0 ? null : categories[index - 1]?.id || null)}>
             <Tab.List className="flex space-x-1 rounded-xl bg-[#F5F5DC]/20 p-1 max-w-3xl mx-auto mb-8">
               <Tab
                 className={({ selected }) =>
@@ -132,18 +124,22 @@ const Menu = () => {
             Ready to Order?
           </h2>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-            <Button 
-              className="bg-[#5C4033] hover:bg-[#8B4513] text-white px-8"
-              size="lg"
-            >
-              Order for Pickup
-            </Button>
-            <Button 
-              className="bg-[#8B4513] hover:bg-[#5C4033] text-white px-8"
-              size="lg"
-            >
-              Order for Delivery
-            </Button>
+            <Link href="/order-online">
+              <Button 
+                className="bg-[#5C4033] hover:bg-[#8B4513] text-white px-8"
+                size="lg"
+              >
+                Order for Pickup
+              </Button>
+            </Link>
+            <Link href="/order-online">
+              <Button 
+                className="bg-[#8B4513] hover:bg-[#5C4033] text-white px-8"
+                size="lg"
+              >
+                Order for Delivery
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

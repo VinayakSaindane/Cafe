@@ -2,6 +2,9 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { BlogPost } from "@shared/schema";
 
+const fallbackBlogImage =
+  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=300&q=80";
+
 interface BlogPostCardProps {
   post: BlogPost;
 }
@@ -14,6 +17,9 @@ const BlogPostCard = ({ post }: BlogPostCardProps) => {
           src={post.imageUrl}
           alt={post.title}
           className="w-full h-full object-cover"
+          onError={(event) => {
+            event.currentTarget.src = fallbackBlogImage;
+          }}
         />
       </div>
       <CardContent className="p-6">

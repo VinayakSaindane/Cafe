@@ -6,8 +6,7 @@ import {
   bookingSchema, 
   reviewSchema, 
   contactSchema,
-  MenuItem,
-  CartItem 
+  insertBlogPostSchema
 } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -113,6 +112,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(posts);
     } catch (error) {
       res.status(500).json({ message: "Error fetching recent blog posts" });
+    }
+  });
+
+  app.post("/api/blog", async (req, res) => {
+    try {
+      const blogData = insertBlogPostSchema.omit({ id: true }).safeParse({
+        ...req.body,
+        publishedAt: req.body.publishedAt ? new Date(req.body.publishedAt) : new Date()
+      });
+
+      if (!blogData.success) {
+        return res.status(400).json({
+          message: "Invalid blog post data",
+          errors: blogData.error.flatten()
+        });
+      }
+
+      const newPost = await storage.createBlogPost(blogData.data);
+      res.status(201).json(newPost);
+    } catch (error) {
+      res.status(500).json({ message: "Error creating blog post" });
     }
   });
 
@@ -372,10 +392,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }));
 
-      // Clear the cart
-      if (req.headers["x-session-id"]) {
-        await storage.clearCart(req.headers["x-session-id"].toString());
-      }
+      const sessionId = req.headers["x-session-id"]?.toString() || "default-session";
+      await storage.clearCart(sessionId);
 
       res.status(201).json({
         message: "Order created successfully",

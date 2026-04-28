@@ -25,6 +25,7 @@ const ReviewCarousel = ({ reviews }: ReviewCarouselProps) => {
   useEffect(() => {
     const handleScroll = () => {
       if (carouselRef.current) {
+        if (carouselRef.current.children.length === 0) return;
         const scrollLeft = carouselRef.current.scrollLeft;
         const slideWidth = carouselRef.current.children[0].clientWidth;
         const newIndex = Math.round(scrollLeft / slideWidth);
@@ -40,6 +41,14 @@ const ReviewCarousel = ({ reviews }: ReviewCarouselProps) => {
       return () => currentRef.removeEventListener("scroll", handleScroll);
     }
   }, [activeIndex]);
+
+  if (reviews.length === 0) {
+    return (
+      <div className="bg-white rounded-lg p-8 text-center text-[#333333]">
+        No reviews yet. Be the first to share your experience.
+      </div>
+    );
+  }
 
   return (
     <div className="review-carousel relative">

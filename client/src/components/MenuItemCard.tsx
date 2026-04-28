@@ -5,6 +5,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
 import { MenuItem } from "@shared/schema";
 
+const fallbackMenuImage =
+  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=350&q=80";
+
 interface MenuItemCardProps {
   item: MenuItem;
   onAddToCart?: (item: MenuItem) => void;
@@ -43,6 +46,9 @@ const MenuItemCard = ({ item, onAddToCart }: MenuItemCardProps) => {
           src={item.imageUrl}
           alt={item.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          onError={(event) => {
+            event.currentTarget.src = fallbackMenuImage;
+          }}
         />
       </div>
       <CardContent className="p-6">

@@ -1,12 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { Employee } from "@shared/schema";
-import { Card, CardContent } from "@/components/ui/card";
-
 const About = () => {
-  const { data: team = [], isLoading } = useQuery<Employee[]>({
-    queryKey: ["/api/team"],
-  });
-
   return (
     <div className="pt-24">
       <div className="container mx-auto px-4 py-12">
@@ -82,45 +74,6 @@ const About = () => {
               </div>
             </div>
           </div>
-          
-          <h2 
-            className="text-3xl font-bold text-[#5C4033] mb-8 text-center"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Meet Our Team
-          </h2>
-          
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, index) => (
-                <div key={index} className="h-80 bg-gray-100 rounded-lg animate-pulse"></div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {team.map((member) => (
-                <Card key={member.id} className="overflow-hidden">
-                  <div className="h-64 overflow-hidden">
-                    <img
-                      src={member.imageUrl}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 
-                      className="text-xl font-bold text-[#5C4033] mb-1"
-                      style={{ fontFamily: "var(--font-heading)" }}
-                    >
-                      {member.name}
-                    </h3>
-                    <p className="text-[#8B4513] font-medium mb-2">{member.position}</p>
-                    <p className="text-[#333333] text-sm">{member.bio}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>
